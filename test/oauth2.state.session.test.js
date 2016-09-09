@@ -1,4 +1,5 @@
 var OAuth2Strategy = require('../lib/strategy')
+  , SessionStateStore = require('../lib/state/session')
   , AuthorizationError = require('../lib/errors/authorizationerror')
   , TokenError = require('../lib/errors/tokenerror')
   , InternalOAuthError = require('../lib/errors/internaloautherror')
@@ -350,8 +351,17 @@ describe('OAuth2Strategy', function() {
     }); // processing response to authorization request
     
   }); // using default session state store
-  
-  
+
+  describe('trying to create a session store without a session key', function() {
+    it('should throw', function() {
+      expect(function () {
+        var stateStore = new SessionStateStore({
+          key: null
+        });
+      }).to.throw(TypeError, 'Session-based state store requires a session key');
+    });
+  });
+
   describe('using default session state store with session key option', function() {
     var strategy = new OAuth2Strategy({
       authorizationURL: 'https://www.example.com/oauth2/authorize',
