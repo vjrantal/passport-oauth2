@@ -34,7 +34,7 @@
   "main": "./lib",
   "dependencies": {
     "passport-strategy": "1.x.x",
-    "oauth": "0.9.x",
+    "oauth": "vjrantal/node-oauth#dynamic-consumer",
     "uid2": "0.0.x"
   },
   "devDependencies": {
